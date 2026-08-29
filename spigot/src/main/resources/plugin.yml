@@ -1,0 +1,25 @@
+name: MineSentry
+version: '${version}'
+main: com.minesentry.minesentryspigot.MineSentrySpigot
+api-version: '1.16'
+load: STARTUP
+website: https://minesentry.com
+
+commands:
+  minesentry:
+    aliases: ["msentry"]
+
+permissions:
+  minesentry:
+    default: op
+    children:
+      command.reload: true
+      command.status: true
+      command.check: true
+
+  minesentry.command.reload:
+    description: "reload コマンドを許可"
+  minesentry.command.status:
+    description: "status コマンドを許可"
+  minesentry.command.check:
+    description: "check コマンドを許可"

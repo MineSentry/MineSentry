@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "minesentry",
+  "version": "${mod_version}",
+  "name": "MineSentry",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "com.minesentry.minesentry.MineSentryMod"
+      }
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-language-kotlin": ">=${fabric_language_kotlin_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version_range}",
+    "java": ">=21"
+  }
+}

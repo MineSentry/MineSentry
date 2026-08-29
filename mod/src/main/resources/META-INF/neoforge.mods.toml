@@ -1,0 +1,22 @@
+modLoader="kotlinforforge"
+loaderVersion="[${kotlin_for_forge_version},)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="minesentry"
+version="${mod_version}"
+displayName="MineSentry"
+
+[[dependencies.minesentry]]
+modId="neoforge"
+type="required"
+versionRange="[${neoforge_version},)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.minesentry]]
+modId="minecraft"
+type="required"
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"

@@ -1,0 +1,17 @@
+# ==============================
+#    [ APIの設定 ]
+# ==============================
+[API]
+# APIサーバーのURL
+# Def: "https://api.minesentry.com/"
+url = "https://api.minesentry.com/"
+
+# APIキー - コミュニティ登録をすることで取得できます。( https://minesentry.com/docs/procedures/community )
+# 設定することで、警告機能の利用が可能になります。
+# Def: ""
+key = ""
+
+
+# コンフィグのバージョン
+# 絶対に変更しないでください！
+configVersion = 1

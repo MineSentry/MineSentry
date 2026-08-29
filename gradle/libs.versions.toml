@@ -1,0 +1,25 @@
+# Version catalog is a central place for you to declare and version dependencies
+# https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
+# https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
+
+[versions]
+kotlin = "2.3.21"
+shadowJar = "9.2.0"
+
+bridger = "1.3.11"
+
+spigot = "1.16.1-R0.1-SNAPSHOT"
+
+[libraries]
+# :buildSrc
+gradle-plugin-kotlin-jvm = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gradle-plugin-kotlin-serialization = { module = "org.jetbrains.kotlin.plugin.serialization:org.jetbrains.kotlin.plugin.serialization.gradle.plugin", version.ref = "kotlin" }
+gradle-plugin-shadowJar = { module = "com.gradleup.shadow:shadow-gradle-plugin", version.ref = "shadowJar" }
+
+# Common
+# MOD以外
+bridger = { module = "com.mojang:brigadier", version.ref = "bridger" }
+
+# Platforms
+## :spigot
+spigot-api = { module = "org.spigotmc:spigot-api", version.ref = "spigot" }
