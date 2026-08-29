@@ -1,0 +1,9 @@
+{
+  "id": "minesentry",
+  "name": "MineSentry",
+  "version": "${version}",
+  "url": "https://minesentry.com",
+  "authors": [],
+  "dependencies": [],
+  "main": "com.minesentry.minesentryvelocity.MineSentryVelocity"
+}

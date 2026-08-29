@@ -26,7 +26,8 @@ plugins {
 rootProject.name = "MineSentry"
 include(
     "common",
-    "spigot"
+    "spigot",
+    "velocity"
 )
 
 stonecutter {
