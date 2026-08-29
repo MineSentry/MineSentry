@@ -6,16 +6,12 @@ import com.akuleshov7.ktoml.TomlInputConfig
 import com.akuleshov7.ktoml.TomlOutputConfig
 import com.minesentry.lib.MineSentryClient
 import com.minesentry.lib.model.CommunityCheckResponse
-import com.minesentry.lib.model.Platform
-import com.minesentry.lib.model.Punishment
 import com.minesentry.lib.model.PunishmentSummary
-import com.minesentry.lib.model.PunishmentType
 import com.minesentry.minesentry.config.ConfigHelper
 import com.minesentry.minesentry.event.MsPlayerLoginEvent
 import com.minesentry.minesentry.event.MsPlayerPostLoginEvent
 import com.minesentry.minesentry.util.ApiUtil
 import net.kyori.adventure.text.minimessage.MiniMessage
-import java.util.logging.Level
 import kotlin.system.measureTimeMillis
 
 object MineSentry {
