@@ -1,6 +1,6 @@
 name: MineSentry
 version: '${version}'
-main: com.minesentry.minesentryspigot.MineSentrySpigot
+main: com.minesentry.minesentry.spigot.MineSentrySpigot
 api-version: '1.16'
 load: STARTUP
 website: https://minesentry.com

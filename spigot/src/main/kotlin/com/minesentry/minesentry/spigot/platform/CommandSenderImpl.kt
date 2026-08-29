@@ -1,9 +1,9 @@
-package com.minesentry.minesentryspigot.platform
+package com.minesentry.minesentry.spigot.platform
 
 import com.minesentry.minesentry.command.MsCommandSender
 import com.minesentry.minesentry.patch.MsServer
-import com.minesentry.minesentryspigot.platform.PlatformUtil.patch
-import com.minesentry.minesentryspigot.platform.PlatformUtil.toNative
+import com.minesentry.minesentry.spigot.platform.PlatformUtil.patch
+import com.minesentry.minesentry.spigot.platform.PlatformUtil.toNative
 import net.kyori.adventure.text.Component
 import org.bukkit.command.CommandSender
 

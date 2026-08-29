@@ -1,4 +1,4 @@
-package com.minesentry.minesentryspigot
+package com.minesentry.minesentry.spigot
 
 import com.minesentry.minesentry.MineSentry
 import com.minesentry.minesentry.command.MsCommand
@@ -6,9 +6,9 @@ import com.minesentry.minesentry.command.MsCommandSource
 import com.minesentry.minesentry.event.MsPlayerLoginEvent
 import com.minesentry.minesentry.event.MsPlayerPostLoginEvent
 import com.minesentry.minesentry.patch.MsPlayerIdentity
-import com.minesentry.minesentryspigot.platform.PlatformUtil.toNative
-import com.minesentry.minesentryspigot.platform.MsPlayerImpl
-import com.minesentry.minesentryspigot.platform.SpigotPlatform
+import com.minesentry.minesentry.spigot.platform.PlatformUtil.toNative
+import com.minesentry.minesentry.spigot.platform.MsPlayerImpl
+import com.minesentry.minesentry.spigot.platform.SpigotPlatform
 import com.mojang.brigadier.CommandDispatcher
 import net.md_5.bungee.api.chat.BaseComponent
 import org.bukkit.event.EventHandler

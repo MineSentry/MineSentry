@@ -1,8 +1,8 @@
-package com.minesentry.minesentryspigot
+package com.minesentry.minesentry.spigot
 
 import com.minesentry.minesentry.command.CommandUtil.getAccessibleSuggestions
 import com.minesentry.minesentry.command.MsCommandSource
-import com.minesentry.minesentryspigot.platform.PlatformUtil.patch
+import com.minesentry.minesentry.spigot.platform.PlatformUtil.patch
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.exceptions.CommandSyntaxException
 import org.bukkit.command.Command

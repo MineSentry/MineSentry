@@ -1,4 +1,4 @@
-package com.minesentry.minesentryspigot.platform
+package com.minesentry.minesentry.spigot.platform
 
 import com.minesentry.minesentry.command.MsCommandSource
 import com.minesentry.minesentry.patch.MsServer

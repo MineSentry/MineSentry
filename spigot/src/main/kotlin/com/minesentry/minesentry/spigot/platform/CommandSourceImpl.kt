@@ -1,11 +1,11 @@
-package com.minesentry.minesentryvelocity.platform
+package com.minesentry.minesentry.spigot.platform
 
 import com.minesentry.minesentry.command.MsCommandSender
 import com.minesentry.minesentry.command.MsCommandSource
-import com.velocitypowered.api.command.CommandSource
+import org.bukkit.command.CommandSender
 
 class CommandSourceImpl(
-    private val native: CommandSource
+    private val native: CommandSender
 ): MsCommandSource {
 
     override val sender: MsCommandSender = CommandSenderImpl(native)

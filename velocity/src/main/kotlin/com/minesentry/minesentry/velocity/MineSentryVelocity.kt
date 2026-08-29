@@ -1,4 +1,4 @@
-package com.minesentry.minesentryvelocity
+package com.minesentry.minesentry.velocity
 
 import com.google.inject.Inject
 import com.minesentry.minesentry.MineSentry
@@ -6,9 +6,9 @@ import com.minesentry.minesentry.command.MsCommand
 import com.minesentry.minesentry.event.MsPlayerLoginEvent
 import com.minesentry.minesentry.event.MsPlayerPostLoginEvent
 import com.minesentry.minesentry.patch.MsPlayerIdentity
-import com.minesentry.minesentryvelocity.platform.MsPlayerImpl
-import com.minesentry.minesentryvelocity.platform.PlatformUtil.patch
-import com.minesentry.minesentryvelocity.platform.VelocityPlatform
+import com.minesentry.minesentry.velocity.platform.MsPlayerImpl
+import com.minesentry.minesentry.velocity.platform.PlatformUtil.patch
+import com.minesentry.minesentry.velocity.platform.VelocityPlatform
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.tree.LiteralCommandNode
 import com.velocitypowered.api.command.BrigadierCommand

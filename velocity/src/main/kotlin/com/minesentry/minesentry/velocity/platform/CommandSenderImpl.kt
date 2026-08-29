@@ -1,4 +1,4 @@
-package com.minesentry.minesentryvelocity.platform
+package com.minesentry.minesentry.velocity.platform
 
 import com.minesentry.minesentry.MineSentry
 import com.minesentry.minesentry.command.MsCommandSender
