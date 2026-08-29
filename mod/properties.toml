@@ -39,63 +39,68 @@ neoforge = "21.11.45"
 kotlin_for_forge = "6.3.0"
 
 # ====================
-#   [ 1.21.5 - 1.21.10 ]
-# ====================
-["fabric-1.21.5"]
-minecraft_version_range = ">=1.21.5 <=1.21.10"
-fabric_api = "0.128.2+1.21.5"
-fabric_loader = "0.19.3"
-fabric_language_kotlin = "1.13.13+kotlin.2.4.10"
-
-["neoforge-1.21.5"]
-minecraft_version_range = "[1.21.5,1.21.10]"
-neoforge = "21.5.98"
-kotlin_for_forge = "5.12.0"
-
-# ====================
-#   [ 1.21.4 ]
-# ====================
-["fabric-1.21.4"]
-fabric_api = "0.119.4+1.21.4"
-fabric_loader = "0.19.3"
-fabric_language_kotlin = "1.13.13+kotlin.2.4.10"
-
-["neoforge-1.21.4"]
-neoforge = "21.4.157"
-kotlin_for_forge = "5.12.0"
-
-# ====================
-#   [ 1.21 - 1.21.3 ]
+#   [ 1.21 - 1.21.10 ]
 # ====================
 ["fabric-1.21"]
-minecraft_version_range = ">=1.21 <=1.21.3"
+minecraft_version_range = ">=1.21 <=1.21.10"
 fabric_api = "0.102.0+1.21"
 fabric_loader = "0.19.3"
 fabric_loader_version_range = "*"
 fabric_language_kotlin = "1.13.13+kotlin.2.4.10"
 
 ["neoforge-1.21"]
-minecraft_version_range = "[1.21,1.21.3]"
+minecraft_version_range = "[1.21,1.21.10]"
 neoforge = "21.0.167"
 neoforge_version_range = ""
 kotlin_for_forge = "5.12.0"
 
 
 # ====================
-#   [ 1.20.1 - 1.20.6 ]
+#   [ 1.20.5 - 1.20.6 ]
 # ====================
-["fabric-1.20.4"]
-minecraft_version_range = ">=1.20 <=1.20.6"
-fabric_api = "0.92.11+1.20.1"
+["fabric-1.20.5"]
+minecraft_version_range = ">=1.20.5 <=1.20.6"
+fabric_api = "0.97.8+1.20.5"
 fabric_loader = "0.19.4"
 fabric_loader_version_range = "*"
 fabric_language_kotlin = "1.13.13+kotlin.2.4.10"
 
+# NeoForge 1.20.6 のみ
+# ※ModDevGradleが1.20.5に対応していないため
+["neoforge-1.20.6"]
+minecraft_version_range = "[1.20.6]"
+neoforge = "20.6.139"
+neoforge_version_range = ""
+kotlin_for_forge = "5.10.0"
+
+# ====================
+#   [ 1.20.2 - 1.20.4 ] ※Fabricのみ
+# ====================
+["fabric-1.20.2"]
+minecraft_version_range = ">=1.20.2 <=1.20.4"
+fabric_api = "0.91.6+1.20.2"
+fabric_loader = "0.19.4"
+fabric_loader_version_range = "*"
+fabric_language_kotlin = "1.13.13+kotlin.2.4.10"
+
+# NeoForge 1.20.4 のみ
+# ※ModDevGradleが1.20.2に対応していないため
 ["neoforge-1.20.4"]
-minecraft_version_range = "[1.20,1.20.6]"
+minecraft_version_range = "[1.20.4]"
+# ponytail: MDG 2 needs Gradle module metadata (moddev-bundle). 20.2.x never shipped it; compile against 1.20.4.
 neoforge = "20.4.251"
 neoforge_version_range = ""
 kotlin_for_forge = "4.12.0"
+
+# ====================
+#   [ 1.20 - 1.20.1 ]
+# ====================
+["fabric-1.20.1"]
+minecraft_version_range = ">=1.20 <=1.20.1"
+fabric_api = "0.92.11+1.20.1"
+fabric_loader = "0.19.4"
+fabric_loader_version_range = "*"
+fabric_language_kotlin = "1.13.13+kotlin.2.4.10"
 
 
 # ====================

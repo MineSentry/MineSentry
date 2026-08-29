@@ -1,8 +1,8 @@
-package com.minesentry.minesentry.platform
+package com.minesentry.minesentry.mod.platform
 
 import com.minesentry.minesentry.patch.MsPlayer
 import com.minesentry.minesentry.patch.MsServer
-import com.minesentry.minesentry.platform.PlatformUtil.patch
+import com.minesentry.minesentry.mod.platform.PlatformUtil.patch
 import net.minecraft.server.MinecraftServer
 
 class MsServerImpl(

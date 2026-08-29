@@ -7,6 +7,9 @@ modId="minesentry"
 version="${mod_version}"
 displayName="MineSentry"
 
+[[mixins]]
+config="minesentry.mixins.json"
+
 [[dependencies.minesentry]]
 modId="neoforge"
 type="required"

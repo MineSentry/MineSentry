@@ -1,9 +1,9 @@
-package com.minesentry.minesentry.platform
+package com.minesentry.minesentry.mod.platform
 
-import com.minesentry.minesentry.MineSentryMod
+import com.minesentry.minesentry.mod.MineSentryMod
 import com.minesentry.minesentry.patch.MsPlayer
 import com.minesentry.minesentry.patch.MsServer
-import com.minesentry.minesentry.platform.PlatformUtil.toNative
+import com.minesentry.minesentry.mod.platform.PlatformUtil.toNative
 import net.kyori.adventure.text.Component
 import net.minecraft.server.level.ServerPlayer
 import java.util.UUID
@@ -29,6 +29,11 @@ class MsPlayerImpl(
     }
 
     override fun sendMessage(component: Component) {
+        /** 1.19 から sendSystemMessage となった */
+        //? if >=1.19 {
         native.sendSystemMessage(component.toNative())
+        //? } else {
+        /*native.displayClientMessage(component.toNative(), true)
+        *///? }
     }
 }
