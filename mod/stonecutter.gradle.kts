@@ -6,7 +6,7 @@ stonecutter active "fabric-26.2"
 
 stonecutter parameters {
     constants.match(
-        current.project.substringAfterLast('-'),
+        current.project.substringBeforeLast('-'),
         "fabric",
         "neoforge"
     )
