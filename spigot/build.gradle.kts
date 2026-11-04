@@ -1,3 +1,5 @@
+import buildsrc.convention.ReleaseInfoTask
+
 plugins {
     id("buildsrc.convention.common")
     id("buildsrc.convention.platform")
@@ -31,4 +33,9 @@ tasks.processResources {
     filesMatching("plugin.yml") {
         expand(props)
     }
+}
+
+// plugin.yml の api-version と揃える（上限なし = 最新まで）
+tasks.named<ReleaseInfoTask>("releaseInfo") {
+    gameVersionRange.set(">=1.16")
 }

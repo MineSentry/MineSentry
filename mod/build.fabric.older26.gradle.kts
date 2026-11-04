@@ -1,3 +1,4 @@
+import buildsrc.convention.ReleaseInfoTask
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
@@ -49,4 +50,8 @@ val shadowJar = tasks.named<ShadowJar>("shadowJar") {
 
 kotlin {
     jvmToolchain(25)
+}
+
+tasks.named<ReleaseInfoTask>("releaseInfo") {
+    gameVersionRange.set(minecraftVersionRange)
 }
