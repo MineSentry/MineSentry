@@ -125,7 +125,12 @@ object MsCommand {
     ): Int {
         val source = sourceAdapter.adapt(ctx.source)
         val sender = source.sender
-        val player = PlayerResolver(ctx.getArgument("player", String::class.java)).resolve(source)
+        val rawName = ctx.getArgument("player", String::class.java)
+        val player = PlayerResolver(rawName).resolve(source)
+        if (player == null) {
+            sender.sendErrorMessage("プレイヤー「$rawName」が見つかりませんでした。")
+            return Command.SINGLE_SUCCESS
+        }
 
         // APIからプレイヤーデータを取得
         val playerData = try {
