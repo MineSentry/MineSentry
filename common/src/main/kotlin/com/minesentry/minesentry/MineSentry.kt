@@ -90,19 +90,7 @@ object MineSentry {
 
     fun onPostLogin(event: MsPlayerPostLoginEvent) {
         val player = event.player
-        //val playerData = ApiUtil.getCacheOrRequestPlayerData(player.uuid) ?: return
-        val playerData = CommunityCheckResponse(
-            banned = false,
-            activeWarns = listOf(
-                PunishmentSummary(
-                    id = 1L,
-                    communityId = 1,
-                    communityName = "今日鯖",
-                    reason = "大規模なグリーフィング行為",
-                    issuedAt = ""
-                )
-            )
-        )
+        val playerData = ApiUtil.getCacheOrRequestPlayerData(player.uuid) ?: return
 
         if (playerData.activeWarns.isEmpty() && playerData.activeGbans.isEmpty()) return
 
