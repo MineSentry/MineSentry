@@ -171,11 +171,31 @@ function findReleaseInfos(dir, found = []) {
   return found;
 }
 
+const FETCH_ATTEMPTS = 5;
+const FETCH_TIMEOUT_MS = 30_000;
+
 async function fetchReleases() {
-  const res = await fetch(MOJANG_MANIFEST);
-  if (!res.ok) throw new Error(`Failed to fetch Mojang version manifest: ${res.status}`);
-  const manifest = await res.json();
-  return manifest.versions.filter((v) => v.type === "release").map((v) => v.id);
+  let lastError;
+  for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {
+    try {
+      const res = await fetch(MOJANG_MANIFEST, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
+      if (!res.ok) throw new Error(`Failed to fetch Mojang version manifest: ${res.status}`);
+      const manifest = await res.json();
+      return manifest.versions.filter((v) => v.type === "release").map((v) => v.id);
+    } catch (e) {
+      lastError = e;
+      console.error(`Mojang version manifest attempt ${attempt}/${FETCH_ATTEMPTS} failed: ${describeError(e)}`);
+      if (attempt < FETCH_ATTEMPTS) await new Promise((r) => setTimeout(r, 2 ** attempt * 1000));
+    }
+  }
+  throw lastError;
+}
+
+/** `fetch failed` のような message だけでは原因が分からないので、cause も辿って連結する。 */
+function describeError(e) {
+  const parts = [];
+  for (let cur = e; cur; cur = cur.cause) parts.push(cur.code ? `${cur.message} (${cur.code})` : String(cur.message ?? cur));
+  return parts.join(" <- ");
 }
 
 async function main() {
@@ -245,7 +265,7 @@ async function main() {
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   main().catch((e) => {
-    console.error(e.message);
+    console.error(describeError(e));
     process.exit(1);
   });
 }

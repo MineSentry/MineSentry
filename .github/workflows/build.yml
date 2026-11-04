@@ -1,0 +1,30 @@
+# main への push でフルビルドし、Gradle キャッシュ（依存・ビルドキャッシュ）を温める。
+# タグ（Release）実行のキャッシュは読み取り専用で、既定ブランチのキャッシュを引き継ぐ。
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: |
+            17
+            21
+            25
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - run: bash ./gradlew releaseInfo

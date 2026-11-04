@@ -29,7 +29,9 @@ env:
   TAG: ${{ github.event.release.tag_name || inputs.tag }}
 
 jobs:
-  release:
+  # 時間のかかるビルドだけを分離し、成果物を artifact に残す。
+  # publish が失敗しても「Re-run failed jobs」でビルドをやり直さずに済む。
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -45,14 +47,45 @@ jobs:
             21
             25
 
+      # タグ実行ではキャッシュが読み取り専用になる（書き込みは既定ブランチのみ）。
+      # キャッシュは main への push で build.yml が温めておく。
       - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build all targets
+        run: bash ./gradlew releaseInfo
+
+      - name: Pack release outputs
+        run: |
+          find . -type d -path '*/build/release' -not -path './build/release' -not -path '*/node_modules/*' -print0 \
+            | tar --null -czf "$RUNNER_TEMP/release-build.tgz" -T -
+          tar -tzf "$RUNNER_TEMP/release-build.tgz" | grep -c release-info.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-build
+          path: ${{ runner.temp }}/release-build.tgz
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-build
+          path: ${{ runner.temp }}
+
+      - name: Unpack release outputs
+        run: tar -xzf "$RUNNER_TEMP/release-build.tgz"
 
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-
-      - name: Build all targets
-        run: bash ./gradlew releaseInfo --no-daemon
 
       - name: Read release notes
         env:
