@@ -26,3 +26,18 @@ tasks.named<ShadowJar>("shadowJar") {
     archiveClassifier.set("")
     configurations = listOf(shade)
 }
+
+// リリース CI 用。配布物や MC バージョン範囲が既定と異なるプロジェクトは各ビルドスクリプトで上書きする
+val releaseBaseName = "${rootProject.name}-${project.name}"
+val javaToolchain = the<JavaPluginExtension>().toolchain
+tasks.register<ReleaseInfoTask>("releaseInfo") {
+    group = "release"
+    target.convention(project.name)
+    platform.convention(project.name.substringBefore('-'))
+    gameVersionRange.convention("")
+    javaVersion.convention(javaToolchain.languageVersion.map { it.asInt() })
+    version.convention(provider { project.version.toString() })
+    fileName.convention(version.map { "$releaseBaseName-$it.jar" })
+    artifact.convention(tasks.named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
+    outputDir.convention(layout.buildDirectory.dir("release"))
+}

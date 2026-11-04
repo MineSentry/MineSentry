@@ -1,0 +1,95 @@
+# GitHub で Release を公開すると、全ターゲットをビルドして jar を Release に添付し、
+# MineSentry のダウンロードページに登録する。
+#
+# 必要な設定（Settings → Secrets and variables → Actions）:
+#   secrets.MINESENTRY_RELEASE_TOKEN  Core の RELEASE_PUBLISH_TOKEN と同じ値
+#   vars.MINESENTRY_API_URL           例: https://api.minesentry.com
+#   secrets.LIB_REPO_TOKEN            MineSentryLib が private の場合のみ（contents: read の PAT）
+name: Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 登録するリリースのタグ（例: 1.2.0）
+        required: true
+      register:
+        description: ダウンロードページに登録する（オフなら jar の添付と dry-run のみ）
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.event.release.tag_name || inputs.tag }}
+
+env:
+  TAG: ${{ github.event.release.tag_name || inputs.tag }}
+  # MineSentryLib のバージョンは buildSrc/src/main/kotlin/common.gradle.kts の依存と揃える
+  LIB_REF: main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
+
+      - name: Checkout MineSentryLib
+        uses: actions/checkout@v4
+        with:
+          repository: MineSentry/MineSentryLib
+          ref: ${{ env.LIB_REF }}
+          path: .deps/MineSentryLib
+          token: ${{ secrets.LIB_REPO_TOKEN || github.token }}
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          # 最後に書いたものが既定（Gradle 実行用）。他は toolchain として使われる
+          java-version: |
+            17
+            21
+            25
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Publish MineSentryLib to mavenLocal
+        working-directory: .deps/MineSentryLib
+        run: bash ./gradlew publishToMavenLocal --no-daemon
+
+      - name: Build all targets
+        run: bash ./gradlew releaseInfo --no-daemon
+
+      - name: Read release notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$TAG" --json body,publishedAt,isPrerelease > "$RUNNER_TEMP/release.json"
+          jq -r '.body // ""' "$RUNNER_TEMP/release.json" > "$RUNNER_TEMP/release-body.md"
+          echo "RELEASE_BODY_FILE=$RUNNER_TEMP/release-body.md" >> "$GITHUB_ENV"
+          echo "RELEASE_PUBLISHED_AT=$(jq -r '.publishedAt' "$RUNNER_TEMP/release.json")" >> "$GITHUB_ENV"
+          echo "RELEASE_PRERELEASE=$(jq -r '.isPrerelease' "$RUNNER_TEMP/release.json")" >> "$GITHUB_ENV"
+
+      - name: Collect jars (dry-run)
+        run: node scripts/release/publish.mjs --tag "$TAG" --dry-run
+
+      - name: Upload jars to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" build/release/*.jar build/release/manifest.json --clobber
+
+      - name: Register on the download page
+        if: github.event_name == 'release' || inputs.register
+        env:
+          MINESENTRY_API_URL: ${{ vars.MINESENTRY_API_URL }}
+          MINESENTRY_RELEASE_TOKEN: ${{ secrets.MINESENTRY_RELEASE_TOKEN }}
+        run: node scripts/release/publish.mjs --tag "$TAG"

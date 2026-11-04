@@ -1,3 +1,4 @@
+import buildsrc.convention.ReleaseInfoTask
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import net.fabricmc.loom.task.RemapJarTask
 
@@ -60,4 +61,9 @@ tasks.named<RemapJarTask>("remapJar") {
 
 kotlin {
     jvmToolchain(21)
+}
+
+tasks.named<ReleaseInfoTask>("releaseInfo") {
+    gameVersionRange.set(minecraftVersionRange)
+    artifact.set(tasks.named<RemapJarTask>("remapJar").flatMap { it.archiveFile })
 }

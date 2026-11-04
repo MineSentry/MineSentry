@@ -1,3 +1,5 @@
+import buildsrc.convention.ReleaseInfoTask
+
 plugins {
     id("buildsrc.convention.common")
     id("buildsrc.convention.platform")
@@ -56,4 +58,8 @@ tasks.processResources {
 
 kotlin {
     jvmToolchain(25)
+}
+
+tasks.named<ReleaseInfoTask>("releaseInfo") {
+    gameVersionRange.set(minecraftVersionRange)
 }

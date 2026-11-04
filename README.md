@@ -43,3 +43,22 @@ The shared build logic was extracted to a convention plugin located in `buildSrc
 
 This project uses a version catalog (see `gradle/libs.versions.toml`) to declare and version dependencies
 and both a build cache and a configuration cache (see `gradle.properties`).
+### リリース
+
+GitHub で Release を公開すると、[`.github/workflows/release.yml`](.github/workflows/release.yml) が次を自動で行います。
+
+1. 全ターゲット（Spigot / Velocity / Fabric・NeoForge の全 MC バージョン）をビルドする（`./gradlew releaseInfo`）
+2. jar を Release に添付する
+3. [ダウンロードページ](https://minesentry.com/download)に登録する（Release 本文が変更履歴になる）
+
+対応 MC バージョンは `mod/properties.toml` の `minecraft_version_range` から自動で読み取り、同じ MC バージョンに対応する jar を 1 つのバージョン（例: `1.2.0+1.21`）にまとめて登録します。
+タグは `buildSrc/src/main/kotlin/common.gradle.kts` の `version` と一致させてください。
+
+登録内容はローカルでも確認できます。
+
+```bash
+./gradlew releaseInfo
+node scripts/release/publish.mjs --tag 1.2.0 --dry-run
+```
+
+既存のリリースを登録し直すときは、Actions の「Release」ワークフローをタグを指定して手動実行します。
