@@ -5,5 +5,5 @@
   "url": "https://minesentry.com",
   "authors": [],
   "dependencies": [],
-  "main": "com.minesentry.minesentryvelocity.MineSentryVelocity"
+  "main": "com.minesentry.minesentry.velocity.MineSentryVelocity"
 }
