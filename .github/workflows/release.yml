@@ -13,10 +13,10 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 登録するリリースのタグ（例: 1.2.0）
+        description: "登録するリリースのタグ（例: 1.2.0）"
         required: true
       register:
-        description: ダウンロードページに登録する（オフなら jar の添付と dry-run のみ）
+        description: "ダウンロードページに登録する（オフなら jar の添付と dry-run のみ）"
         type: boolean
         default: true
 
