@@ -7,11 +7,11 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-version = "1.2.0"
+version = "1.3.0"
 
 repositories {
     exclusiveContent {
-        forRepository { mavenLocal() }
+        forRepository { maven { url = uri("https://jitpack.io") } }
         filter { includeGroup("com.minesentry") }
     }
 
