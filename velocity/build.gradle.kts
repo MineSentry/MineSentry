@@ -22,6 +22,7 @@ tasks.processResources {
     val props = mapOf(
         "version" to project.version,
     )
+    inputs.properties(props)
     filesMatching("velocity-plugin.json") {
         expand(props)
     }

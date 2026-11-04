@@ -20,6 +20,8 @@ repositories {
 dependencies {
     compileOnly(libs.spigot.api)
     compileOnly(libs.bridger)
+    // Spigot/Paper does not bundle Kotlin; shade stdlib so the plugin can load.
+    shade(kotlin("stdlib"))
 }
 
 kotlin {
@@ -30,6 +32,7 @@ tasks.processResources {
     val props = mapOf(
         "version" to project.version,
     )
+    inputs.properties(props)
     filesMatching("plugin.yml") {
         expand(props)
     }
