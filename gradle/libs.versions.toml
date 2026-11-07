@@ -4,7 +4,7 @@
 
 [versions]
 kotlin = "2.3.21"
-shadowJar = "9.2.0"
+shadowJar = "9.6.1"
 
 bridger = "1.3.11"
 
