@@ -38,7 +38,7 @@ jobs:
         with:
           ref: ${{ env.TAG }}
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v6
         with:
           distribution: temurin
           # 最後に書いたものが既定（Gradle 実行用）。他は toolchain として使われる
