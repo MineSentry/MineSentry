@@ -60,7 +60,7 @@ jobs:
             | tar --null -czf "$RUNNER_TEMP/release-build.tgz" -T -
           tar -tzf "$RUNNER_TEMP/release-build.tgz" | grep -c release-info.json
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: release-build
           path: ${{ runner.temp }}/release-build.tgz
