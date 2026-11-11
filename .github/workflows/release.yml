@@ -83,7 +83,7 @@ jobs:
       - name: Unpack release outputs
         run: tar -xzf "$RUNNER_TEMP/release-build.tgz"
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
 
