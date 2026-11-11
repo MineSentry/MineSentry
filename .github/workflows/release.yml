@@ -49,7 +49,7 @@ jobs:
 
       # タグ実行ではキャッシュが読み取り専用になる（書き込みは既定ブランチのみ）。
       # キャッシュは main への push で build.yml が温めておく。
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
 
       - name: Build all targets
         run: bash ./gradlew releaseInfo
